@@ -161,26 +161,88 @@
     </section>
 
     
+
 <section id="contact" aria-labelledby="contact-h">
-  <div class="wrap split">
-    <h2 id="contact-h">Parliamo del tuo progetto.</h2>
-
-    <div class="prose">
+  <div class="wrap">
+    <div class="contact-heading">
+      <p class="eyebrow">LET'S WORK TOGETHER</p>
+      <h2 id="contact-h">Parliamo del tuo progetto.</h2>
       <p>
-        Hai bisogno di un sito web?
-        Raccontami la tua idea e valutiamo
-        insieme come realizzarla.
+        Raccontami la tua idea e richiedi
+        un preventivo senza impegno.
       </p>
-
-      <div class="actions">
-        <a class="btn primary"
-           href="mailto:EMAIL_DA_INSERIRE?subject=Richiesta%20preventivo%20-%20Eros%20Digital%20Studio">
-          Richiedi un preventivo
-        </a>
-      </div>
     </div>
+
+    <form
+      id="quote-form"
+      class="quote-form"
+      action="https://formspree.io/f/xwlldpog"
+      method="POST"
+    >
+      <input type="hidden" name="_subject"
+        value="Nuovo preventivo - Eros Digital Studio">
+
+      <div class="form-grid">
+        <div class="form-field">
+          <label for="client-name">Nome e cognome</label>
+          <input id="client-name" name="nome"
+            type="text" autocomplete="name"
+            placeholder="Mario Rossi" required>
+        </div>
+
+        <div class="form-field">
+          <label for="client-email">Email</label>
+          <input id="client-email" name="email"
+            type="email" autocomplete="email"
+            placeholder="nome@email.it" required>
+        </div>
+
+        <div class="form-field">
+          <label for="service">Tipo di sito</label>
+          <select id="service" name="servizio" required>
+            <option value="">Seleziona un servizio</option>
+            <option>Sito vetrina</option>
+            <option>Landing page</option>
+            <option>Altro / Da definire</option>
+          </select>
+        </div>
+
+        <div class="form-field">
+          <label for="budget">Budget indicativo</label>
+          <select id="budget" name="budget" required>
+            <option value="">Seleziona un budget</option>
+            <option>Meno di 300 €</option>
+            <option>300–600 €</option>
+            <option>600–1.000 €</option>
+            <option>Oltre 1.000 €</option>
+            <option>Da definire</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label for="message">Descrivi il progetto</label>
+        <textarea id="message" name="messaggio"
+          rows="6" required
+          placeholder="Raccontami cosa vorresti realizzare..."></textarea>
+      </div>
+
+      <label class="privacy-check">
+        <input type="checkbox" name="presa_visione"
+          required>
+        <span>
+          Confermo di aver letto l'informativa
+          sulla privacy.
+        </span>
+      </label>
+
+      <button class="btn primary" type="submit">
+        Invia richiesta
+      </button>
+    </form>
   </div>
 </section>
+
 
       <div class="wrap split">
         <h2 id="contact-h">Contact</h2>
