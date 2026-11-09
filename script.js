@@ -76,15 +76,16 @@
   const description = document.querySelector('.hero .lead');
 
   function changeLanguage(language) {
-    if (language === 'it') {
-      title.textContent = 'Ciao, sono Eros.';
-      description.textContent =
-        'Aspirante Web Developer. Trasformo idee in esperienze digitali moderne.';
-    } else {
-      title.textContent = "Hi, I'm Eros.";
-      description.textContent =
-        'Aspiring Web Developer. I turn ideas into modern digital experiences.';
-    }
+    
+if (language === 'it') {
+  title.textContent = 'Il tuo prossimo sito web inizia qui.';
+  description.textContent =
+    'Progetto e sviluppo siti web moderni e personalizzati per privati, professionisti e piccole attività.';
+} else {
+  title.textContent = 'Your next website starts here.';
+  description.textContent =
+    'I design and develop modern, personalized websites for individuals, professionals, and small businesses.';
+}
 
     document.documentElement.lang = language;
     langIT.setAttribute('aria-pressed', String(language === 'it'));
