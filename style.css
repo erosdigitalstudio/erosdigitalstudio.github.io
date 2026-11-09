@@ -203,3 +203,96 @@ h3 { font-size: 1.1rem; font-weight: 600; }
 .brand span {
   color: var(--lime);
 }
+
+/* Eros Digital Studio - Modulo preventivi */
+
+.contact-heading {
+  max-width: 650px;
+  margin-bottom: 32px;
+}
+
+.contact-heading .eyebrow {
+  color: var(--lime);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.contact-heading p {
+  color: var(--muted);
+}
+
+.quote-form {
+  max-width: 850px;
+  padding: 32px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.form-field label {
+  color: var(--text);
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.quote-form input,
+.quote-form select,
+.quote-form textarea {
+  width: 100%;
+  padding: 14px;
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  font: inherit;
+}
+
+.quote-form input:focus,
+.quote-form select:focus,
+.quote-form textarea:focus {
+  outline: 2px solid var(--lime);
+  outline-offset: 2px;
+}
+
+.quote-form textarea {
+  resize: vertical;
+}
+
+.privacy-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 24px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.quote-form .privacy-check input {
+  width: auto;
+  margin-top: 3px;
+  accent-color: var(--lime);
+}
+
+@media (max-width: 600px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .quote-form {
+    padding: 20px;
+  }
+}
