@@ -190,3 +190,16 @@ h3 { font-size: 1.1rem; font-weight: 600; }
 .language-switch button[aria-pressed="true"]:hover {
   color: #121411;
 }
+
+/* Eros Digital Studio — Brand */
+
+.brand {
+  font-family: var(--sans);
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.brand span {
+  color: var(--lime);
+}
