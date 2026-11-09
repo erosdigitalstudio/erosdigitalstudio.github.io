@@ -156,3 +156,38 @@ h3 { font-size: 1.1rem; font-weight: 600; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition-duration: .01ms !important; }
 }
+
+/* Selettore lingua IT / EN */
+
+.language-switch {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px;
+  background: #252a21;
+  border-radius: 50px;
+}
+
+.language-switch button {
+  border: none;
+  background: transparent;
+  color: #a3aa9a;
+  padding: 7px 12px;
+  border-radius: 50px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.language-switch button[aria-pressed="true"] {
+  background: #c6f432;
+  color: #121411;
+}
+
+.language-switch button:hover {
+  color: #ffffff;
+}
+
+.language-switch button[aria-pressed="true"]:hover {
+  color: #121411;
+}
