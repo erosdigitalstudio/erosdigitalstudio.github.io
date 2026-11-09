@@ -67,4 +67,30 @@
 
   /* ---------- Footer year ---------- */
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Cambio lingua IT / EN
+  const langIT = document.getElementById('lang-it');
+  const langEN = document.getElementById('lang-en');
+
+  const title = document.querySelector('.hero h1');
+  const description = document.querySelector('.hero .lead');
+
+  function changeLanguage(language) {
+    if (language === 'it') {
+      title.textContent = 'Ciao, sono Eros.';
+      description.textContent =
+        'Aspirante Web Developer. Trasformo idee in esperienze digitali moderne.';
+    } else {
+      title.textContent = "Hi, I'm Eros.";
+      description.textContent =
+        'Aspiring Web Developer. I turn ideas into modern digital experiences.';
+    }
+
+    document.documentElement.lang = language;
+    langIT.setAttribute('aria-pressed', String(language === 'it'));
+    langEN.setAttribute('aria-pressed', String(language === 'en'));
+  }
+
+  langIT.addEventListener('click', () => changeLanguage('it'));
+  langEN.addEventListener('click', () => changeLanguage('en'));
 })();
