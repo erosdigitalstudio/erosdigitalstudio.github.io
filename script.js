@@ -53,18 +53,7 @@
     });
   }
 
-  /* ---------- Copy email ---------- */
-  const copy = document.getElementById('copy');
-  const status = document.getElementById('copy-status');
-  copy.addEventListener('click', async () => {
-    try {
-      await navigator.clipboard.writeText(copy.dataset.email);
-      status.textContent = 'Email copied to clipboard.';
-    } catch {
-      status.textContent = 'Copy failed. Select the address above and copy it manually.';
-    }
-  });
-
+  
   /* ---------- Footer year ---------- */
   document.getElementById('year').textContent = new Date().getFullYear();
 
