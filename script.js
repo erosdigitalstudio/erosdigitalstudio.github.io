@@ -1,86 +1,12 @@
-(() => {
-  'use strict';
-
-  // Lets CSS know JavaScript is available (the menu stays visible without it)
-  document.documentElement.classList.add('js');
-
-  /* ---------- Mobile menu ---------- */
-  const btn = document.querySelector('.menu-btn');
-  const nav = document.getElementById('nav');
-
-  const setMenu = (open) => {
-    nav.classList.toggle('open', open);
-    btn.setAttribute('aria-expanded', String(open));
-    btn.textContent = open ? 'Close' : 'Menu';
-  };
-
-  btn.addEventListener('click', () => setMenu(!nav.classList.contains('open')));
-  nav.addEventListener('click', (e) => { if (e.target.closest('a')) setMenu(false); });
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && nav.classList.contains('open')) { setMenu(false); btn.focus(); }
-  });
-
-  /* ---------- Project cards: show / hide details ---------- */
-  document.querySelectorAll('.card .more').forEach((toggle) => {
-    toggle.addEventListener('click', () => {
-      const open = toggle.closest('.card').classList.toggle('open');
-      toggle.setAttribute('aria-expanded', String(open));
-      toggle.textContent = open ? 'Hide details' : 'Show details';
-    });
-  });
-
-  /* ---------- Highlight the nav link of the section in view ---------- */
-  const links = [...nav.querySelectorAll('a')];
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-      links.forEach((link) => {
-        const active = link.hash === `#${entry.target.id}`;
-        link.classList.toggle('active', active);
-        active ? link.setAttribute('aria-current', 'true') : link.removeAttribute('aria-current');
-      });
-    });
-  }, { rootMargin: '-45% 0px -50% 0px' });
-  document.querySelectorAll('main section[id]').forEach((s) => observer.observe(s));
-
-  /* ---------- Hero glow follows the pointer ---------- */
-  const hero = document.querySelector('.hero');
-  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    hero.addEventListener('pointermove', (e) => {
-      const r = hero.getBoundingClientRect();
-      hero.style.setProperty('--mx', `${e.clientX - r.left}px`);
-      hero.style.setProperty('--my', `${e.clientY - r.top}px`);
-    });
-  }
-
-  
-  /* ---------- Footer year ---------- */
-  document.getElementById('year').textContent = new Date().getFullYear();
-
-  // Cambio lingua IT / EN
-  const langIT = document.getElementById('lang-it');
-  const langEN = document.getElementById('lang-en');
-
-  const title = document.querySelector('.hero h1');
-  const description = document.querySelector('.hero .lead');
-
-  function changeLanguage(language) {
-    
-if (language === 'it') {
-  title.textContent = 'Il tuo prossimo sito web inizia qui.';
-  description.textContent =
-    'Progetto e sviluppo siti web moderni e personalizzati per privati, professionisti e piccole attività.';
-} else {
-  title.textContent = 'Your next website starts here.';
-  description.textContent =
-    'I design and develop modern, personalized websites for individuals, professionals, and small businesses.';
-}
-
-    document.documentElement.lang = language;
-    langIT.setAttribute('aria-pressed', String(language === 'it'));
-    langEN.setAttribute('aria-pressed', String(language === 'en'));
-  }
-
-  langIT.addEventListener('click', () => changeLanguage('it'));
-  langEN.addEventListener('click', () => changeLanguage('en'));
+(()=>{'use strict';
+const translations={
+it:{skip:'Vai al contenuto',menu:'Menu',close:'Chiudi',navAbout:'Chi sono',navServices:'Servizi',navProjects:'Progetti',navContact:'Contatti',heroEyebrow:'WEB DESIGN & DEVELOPMENT',heroTitle:'Il tuo prossimo sito web inizia qui.',heroLead:'Progetto e sviluppo siti web moderni e personalizzati per privati, professionisti e piccole attività.',heroCta:'Richiedi un preventivo',heroSecondary:'Scopri i servizi',heroTag1:'Design responsive',heroTag2:'Approccio su misura',heroTag3:'Comunicazione diretta',aboutEyebrow:'IL PROGETTO',aboutTitle:'Un sito che racconta chi sei.',aboutP1:'Sono Eros, sto costruendo Eros Digital Studio come progetto indipendente dedicato al web design e allo sviluppo front-end.',aboutP2:'Il mio obiettivo è creare esperienze digitali chiare, curate e facili da usare. Il progetto è agli inizi: qui troverai esempi reali del mio percorso, senza clienti o risultati inventati.',servicesEyebrow:'COSA POSSO PROGETTARE',servicesTitle:'Soluzioni digitali, senza complicazioni.',servicesIntro:'Partiamo dalla tua idea e definiamo insieme struttura, contenuti e funzionalità.',service1Title:'Siti vetrina',service1Body:'Una presenza online ordinata e professionale per presentare attività, servizi, orari e contatti.',service2Title:'Landing page',service2Body:"Una pagina mirata per raccontare un servizio, promuovere un'iniziativa o raccogliere richieste.",service3Title:'Aggiornamenti e miglioramenti',service3Body:'Piccole modifiche a contenuti, layout e usabilità di siti statici, da valutare in base al progetto.',serviceLink:'Parliamone →',processEyebrow:'IL METODO',processTitle:"Dall'idea alla pubblicazione.",step1Title:'Ascolto',step1Body:'Mi racconti il progetto e gli obiettivi.',step2Title:'Proposta',step2Body:'Definiamo contenuti, funzionalità e fattibilità.',step3Title:'Realizzazione',step3Body:'Costruisco la pagina e la adattiamo ai dispositivi.',step4Title:'Pubblicazione',step4Body:'Verifichiamo il risultato prima della messa online.',projectsEyebrow:'PORTFOLIO',projectsTitle:'Un progetto concreto da cui partire.',projectLabel:'Progetto personale · In sviluppo',projectBody:'Questo stesso sito è il primo progetto del portfolio: un sito responsive con contenuti bilingui e modulo per le richieste. Non è un lavoro commissionato.',sourceLink:'Vedi il codice su GitHub ↗',contactEyebrow:"LET'S WORK TOGETHER",contactTitle:'Parliamo del tuo progetto.',contactLead:'Descrivi la tua idea. Ti risponderò per valutare insieme la fattibilità e i prossimi passi, senza impegno.',nameLabel:'Nome e cognome',emailLabel:'Email',serviceLabel:'Tipo di sito',selectService:'Seleziona un servizio',other:'Altro / Da definire',budgetLabel:'Budget indicativo',selectBudget:'Seleziona un budget',budget1:'Meno di 300 €',budget4:'Oltre 1.000 €',budgetUnknown:'Da definire',messageLabel:'Descrivi il progetto',messagePlaceholder:'Raccontami cosa vorresti realizzare...',privacyAgree:"Ho letto l'",privacyLink:'informativa privacy',privacyEnd:' relativa alla richiesta.',send:'Invia richiesta',formNote:'La richiesta non comporta alcun acquisto o impegno.',directEmail:'Preferisci scrivere direttamente?',footerStatus:'· Progetto indipendente',footerPrivacy:'Privacy',backTop:'Torna su ↑'},
+en:{skip:'Skip to content',menu:'Menu',close:'Close',navAbout:'About',navServices:'Services',navProjects:'Projects',navContact:'Contact',heroEyebrow:'WEB DESIGN & DEVELOPMENT',heroTitle:'Your next website starts here.',heroLead:'I design and develop modern, personalized websites for individuals, professionals, and small businesses.',heroCta:'Request a quote',heroSecondary:'Explore services',heroTag1:'Responsive design',heroTag2:'Tailored approach',heroTag3:'Direct communication',aboutEyebrow:'THE STUDIO',aboutTitle:'A website that tells your story.',aboutP1:"I'm Eros, building Eros Digital Studio as an independent project focused on web design and front-end development.",aboutP2:'My goal is to create clear, thoughtful and easy-to-use digital experiences. This project is just getting started: the examples here reflect my real work, with no invented clients or results.',servicesEyebrow:'WHAT I CAN DESIGN',servicesTitle:'Digital solutions, made simple.',servicesIntro:"Let's start with your idea and define the structure, content and features together.",service1Title:'Business websites',service1Body:'A clear, professional online presence to present your business, services, hours and contact details.',service2Title:'Landing pages',service2Body:'A focused page to showcase a service, promote an initiative or collect inquiries.',service3Title:'Updates and improvements',service3Body:'Small updates to content, layout and usability for static websites, assessed case by case.',serviceLink:"Let's talk →",processEyebrow:'THE PROCESS',processTitle:'From idea to launch.',step1Title:'Discovery',step1Body:'You tell me about your project and goals.',step2Title:'Proposal',step2Body:'We define content, features and feasibility.',step3Title:'Development',step3Body:'I build the page and make it responsive.',step4Title:'Launch',step4Body:'We review the result before publishing.',projectsEyebrow:'PORTFOLIO',projectsTitle:'A real project to start with.',projectLabel:'Personal project · In progress',projectBody:'This website is the first portfolio project: a responsive site with bilingual content and an inquiry form. It is not a commissioned client project.',sourceLink:'View the source on GitHub ↗',contactEyebrow:"LET'S WORK TOGETHER",contactTitle:"Let's discuss your project.",contactLead:"Describe your idea. I'll reply to discuss feasibility and next steps, with no obligation.",nameLabel:'Full name',emailLabel:'Email',serviceLabel:'Website type',selectService:'Select a service',other:'Other / Not sure',budgetLabel:'Estimated budget',selectBudget:'Select a budget',budget1:'Under €300',budget4:'Over €1,000',budgetUnknown:'To be discussed',messageLabel:'Describe your project',messagePlaceholder:"Tell me what you'd like to build...",privacyAgree:"I have read the ",privacyLink:'privacy notice',privacyEnd:' relating to my inquiry.',send:'Send inquiry',formNote:'Sending an inquiry does not commit you to a purchase.',directEmail:'Prefer to email directly?',footerStatus:'· Independent project',footerPrivacy:'Privacy',backTop:'Back to top ↑'}};
+const nav=document.getElementById('nav'),menu=document.querySelector('.menu-btn'),it=document.getElementById('lang-it'),en=document.getElementById('lang-en');let language='it';
+function setMenu(open){nav.classList.toggle('open',open);menu.setAttribute('aria-expanded',String(open));menu.textContent=translations[language][open?'close':'menu'];}
+menu.addEventListener('click',()=>setMenu(!nav.classList.contains('open')));nav.addEventListener('click',e=>{if(e.target.closest('a'))setMenu(false)});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&nav.classList.contains('open'))setMenu(false)});
+function changeLanguage(lang){language=lang;const t=translations[lang];document.documentElement.lang=lang;document.querySelectorAll('[data-i18n]').forEach(el=>{const key=el.dataset.i18n;if(t[key]!==undefined)el.textContent=t[key]});document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{const key=el.dataset.i18nPlaceholder;if(t[key]!==undefined)el.placeholder=t[key]});it.setAttribute('aria-pressed',String(lang==='it'));en.setAttribute('aria-pressed',String(lang==='en'));menu.textContent=t[nav.classList.contains('open')?'close':'menu'];try{localStorage.setItem('eds-language',lang)}catch{}}
+it.addEventListener('click',()=>changeLanguage('it'));en.addEventListener('click',()=>changeLanguage('en'));let saved='it';try{saved=localStorage.getItem('eds-language')==='en'?'en':'it'}catch{}changeLanguage(saved);
+if('IntersectionObserver'in window){const links=[...nav.querySelectorAll('a')],observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(!entry.isIntersecting)return;links.forEach(link=>{const active=link.hash==='#'+entry.target.id;link.classList.toggle('active',active);if(active)link.setAttribute('aria-current','true');else link.removeAttribute('aria-current')})})},{rootMargin:'-40% 0px -55% 0px'});document.querySelectorAll('main section[id]').forEach(s=>observer.observe(s))}
+const hero=document.querySelector('.hero');if(hero&&window.matchMedia&&!matchMedia('(prefers-reduced-motion: reduce)').matches)hero.addEventListener('pointermove',e=>{const r=hero.getBoundingClientRect();hero.style.setProperty('--mx',e.clientX-r.left+'px');hero.style.setProperty('--my',e.clientY-r.top+'px')});document.getElementById('year').textContent=new Date().getFullYear();
 })();
